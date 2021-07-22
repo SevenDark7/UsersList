@@ -7,32 +7,66 @@
   </head>
   <body>
 
-    <table>
+    <article class="formContine">
+      <form class="inputForm" action="#">
+        <div class="name">
+          <label for="nameLabel">نام و نام خانوادگی</label>
+          <input type="text" id="userName" placeholder="مثال: مهدی عابدی"> 
+        </div>
+
+        <div class="age">
+          <label for="ageLabel">سن</label>
+          <input type="number" id="userAge" placeholder="مثال: 20">
+        </div>
+        
+        <div class="city">
+          <label for="cityLabel">شهر</label>
+          <input type="text" id="userCity" placeholder="مثال: اصفهان">
+        </div>
+        
+        <div class="btn">
+          <button type="reset" id="reset">انصراف</button>
+          <button type="button" id="register">ثبت</button>
+        </div>
+      </form>
+    </article>
+
+    <table class="user">
       <caption>Users List</caption>
       <thead>
         <tr>
+          <th>حذف</th>
+          <th>ویرایش</th>
           <th>شهر</th>
           <th>سن</th>
           <th>نام و نام خانوادگی</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="users">
         <tr>
+          <td><button type="button" class="del">حذف</button></td>
+          <td><button type="button" class="edit">ویرایش</button></td>
           <td>اصفهان</td>
           <td>20</td>
           <td>مهدی عابدی</td>
         </tr>
         <tr>
+          <td><button type="button" class="del">حذف</button></td>
+          <td><button type="button" class="edit">ویرایش</button></td>
           <td>یاسوج</td>
           <td>18</td>
           <td>حسین مرادی</td>
         </tr>
         <tr>
+          <td><button type="button" class="del">حذف</button></td>
+          <td><button type="button" class="edit">ویرایش</button></td>
           <td>تهران</td>
           <td>27</td>
           <td>محمد رضا یاسینی</td>
         </tr>
         <tr>
+          <td><button type="button" class="del">حذف</button></td>
+          <td><button type="button" class="edit">ویرایش</button></td>
           <td>کرمان</td>
           <td>31</td>
           <td>حامد یعقوبی</td>
@@ -40,5 +74,33 @@
       </tbody>
     </table>
 
+
+    <script src="jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#register").click(function() {
+          var username = $("#userName").val();
+          var userage = $("#userAge").val();
+          var usercity = $("#userCity").val();
+          if (username.trim().length < 1 || userage.trim().length < 1 || parseInt(userage) < 1 || usercity.trim().length < 1) {
+            alert("لطفا مقادیر مربوطه را به صورت صحیح وارد کنید");
+          }else {
+
+            var userRow = $("<tr></tr>").prependTo("#users");
+            var cityData = $("<td></td>").text(usercity).appendTo(userRow);
+            var ageData = $("<td></td>").text(userage).appendTo(userRow);
+            var nameData = $("<td></td>").text(username).appendTo(userRow);
+            $("#reset").click();
+          }
+        });
+
+        $(".del").click(function() {
+          $(this).parent().parent().remove();
+        });
+
+      });
+       
+    </script>
+   
   </body>
 </html>
