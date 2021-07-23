@@ -103,34 +103,33 @@
           $(this).parent().parent().remove();
         });
 
+        let editRow;
+        let usercity;
+        let userage;
+        let username;
 
         $(".edit").click(function() {
           $("#register").hide();
           $("#change").show();
-          var editRow = $(this).parent().parent();
-          var usercity = editRow.children("td:nth-child(3)").text();
-          var userage = editRow.children("td:nth-child(4)").text();
-          var username = editRow.children("td:nth-child(5)").text();
+          editRow = $(this).parent().parent();
+          usercity = editRow.children("td:nth-child(3)");
+          userage = editRow.children("td:nth-child(4)");
+          username = editRow.children("td:nth-child(5)");
           $("#reset").click();
-          $("#userName").val(username);
-          $("#userAge").val(userage);
-          $("#userCity").val(usercity);
-
-          $("#change").click(function() {
-            usercity = $("#userName").val();
-            userage = $("#userAge").val();
-            username = $("#userCity").val();
-            editRow.children("td:nth-child(3)").text(username);
-            editRow.children("td:nth-child(4)").text(userage);
-            editRow.children("td:nth-child(5)").text(usercity);
-            $("#reset").click();
-            $("#register").show();
-            $("#change").hide();
-          });
-          
+          $("#userName").val(username.text());
+          $("#userAge").val(userage.text());
+          $("#userCity").val(usercity.text());
         });
+        
+        $("#change").click(function() {
+            usercity.text($("#userCity").val());
+            userage.text($("#userAge").val());
+            username.text($("#userName").val());
+            $("#reset").click();
+            $("#change").hide();
+            $("#register").show();
+          });
       });
-       
     </script>
    
   </body>
