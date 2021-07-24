@@ -1,0 +1,54 @@
+form {
+  text-align: center;
+}
+
+fieldset {
+  display: inline;
+  border-radius: 5px;
+}
+
+legend {
+  text-align: left;
+}
+
+img {
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+}
+
+a:hover{
+  color: #f45342;
+  text-decoration: none;
+}
+
+
+button:hover {
+  opacity: 0.8;
+}
+
+.login {
+  margin: 7%;
+}
+
+.loginbtn{
+  float: right;
+}
+
+.chkBox {
+  float: left;
+}
+
+
+.foot > * {
+  margin: 5%
+}
+
+.cancel {
+  float: left;
+  background-color: #f44336;
+}
+
+.psw {
+  float: right;
+}

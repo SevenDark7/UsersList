@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>intro page</title>
+  </head>
+  <body>
+
+    <form action="logged.php" method="post" target="_blank" novalidate>
+      <div class="image">
+        <img src="images/avatar.png" alt="Avatar Image">
+      </div>
+      <fieldset>
+        <legend>Login</legend>
+        <div>
+          <table>
+            <tr>
+              <td><label for="username">Username: </label></td>
+              <td><input type="text" name="username" id="username" placeholder="Enter Username" autofocus></td>
+            </tr>
+            <tr>
+              <td><label for="pass"></label>Password: </td>
+              <td><input type="password" name="pass" id="pass" placeholder="Enter Password"></td>
+            </tr>
+            <tr>
+              <td><label for="phoneNumber">Phone: </label></td>
+              <td><input type="text" name="phoneNumber" id="phoneNumber" value="09" pattern="[0-9]{11}"></td>
+            </tr>
+          </table>
+        </div>
+        <div class="login">
+          <label class="chkBox">
+            <input type="checkbox" checked name="chkBox"> Remember me
+          </label>
+          <input type="submit" class="loginbtn" name="login" value="Login">
+        </div>
+
+        <div class="foot">
+          <button type="reset" class="cancel" name="cancel">Cancel</button>
+          <span class="psw">Forgot <a href="#">Password?</a> </span>
+        </div>
+
+      </fieldset>
+    </form>
+
+
+  </body>
+</html>
