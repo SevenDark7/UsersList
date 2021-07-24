@@ -6,6 +6,13 @@
     <title>Project2</title>
   </head>
   <body>
+    
+    <article>
+      <header>
+        <a href="TemplateSite/index.html" target="_blank">پروژه جداگانه</a>
+        <a href="Form/index.html" target="_blank">پروژه فرم</a>
+      </header>
+    </article>
 
     <article class="formContine">
       <form class="inputForm" action="#">
@@ -122,13 +129,17 @@
         });
         
         $("#change").click(function() {
+          if ($("#userCity").val().trim().length < 1 || $("#userAge").val().trim().length < 1 || parseInt($("#userAge").val()) < 1 || $("#userName").val().trim().length < 1) {
+            alert("لطفا مقادیر مربوطه را به صورت صحیح وارد کنید");
+          }else {
             usercity.text($("#userCity").val());
             userage.text($("#userAge").val());
             username.text($("#userName").val());
             $("#reset").click();
             $("#change").hide();
             $("#register").show();
-          });
+          }
+        });
       });
     </script>
    
