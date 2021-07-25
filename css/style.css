@@ -1,7 +1,10 @@
+body {
+  background: #19191d;
+}
+
 header {
   display: flex;
-  border: 1px solid black;
-  background-color: darkgray;
+  background-color: #25252f;
   padding: 10px;
   justify-content: flex-end;
   margin-bottom: 5%;
@@ -11,6 +14,7 @@ header {
 header a {
   margin: 0 2%;
   text-decoration: none;
+  color: white;
 }
 
 header a:hover {
@@ -31,12 +35,13 @@ article.formContine {
   direction: rtl;
   align-items: center;
   padding: 1vw 3vw;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 5px;
 }
 
-.inputForm input, .inputForm label {
-  padding: 0 2vw;
+.inputForm label {
+  color: white;
+  margin-left: 3vw;
 }
 
 .name {
@@ -72,37 +77,50 @@ button {
 }
 
 .del, .edit {
-  font-size: 2vw;
+  font-size: 1.5vw;
+  background-color: #2e2e36;
+  border-color: white;
+  color: white;
+  padding: 0.5vw 0.7vw;
+}
+
+.del:active, .edit:active {
+  color: #777;
+  background: #25252b;
 }
 
 table.user {
   margin: auto;
-  border-collapse: collapse;
-  /* border-radius: 10px; */
+  border-spacing: 0 3px;
+  width: 70%;
 }
 
-.user, th, td {
-  border: 1px solid #ddd;
+th, td {
+  padding: 1vw 3vw;
+  direction: rtl;
+  text-align: center;
 }
 
-.user tr:hover {
-  background-color: #c5c5c5;
+th {
+  color: white;
 }
 
-.user th {
-  background-color: #f1f1f1;
-  padding: 2vw;
+tbody td {
+  color: #777;
+  background: #25252b;
 }
 
 caption, .user th, .user td {
-  font-size: 3vw;
+  font-size: 2vw;
 }
 
-.user td {
-  font-family: sans-serif;
-  direction: rtl;
-  cursor: pointer;
-  padding: 2vw;
+tbody tr td{
+  transition: 0.5s ease-out;
+}
+
+tbody tr:hover td{
+  background: #2e2e36 !important;
+  color: white;
 }
 
 td:nth-child(1){
@@ -113,7 +131,9 @@ td:nth-child(2){
   text-align: center;
 }
 
-.user td:hover {
-  background-color: #aaa;
-  box-shadow: -7px 7px 10px gray;
+@font-face {
+  font-family: IRANSansWeb;
+  src: url(../fonts/IRANSansWeb.eot) format(eot);
+  src: url(../fonts/IRANSansWeb.ttf) format(ttf);
+  src: url(../fonts/IRANSansWeb.woff) format(woff);
 }
