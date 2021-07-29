@@ -5,20 +5,28 @@ body {
 header {
   display: flex;
   background-color: #25252f;
-  padding: 10px;
-  justify-content: flex-end;
+  padding: 20px;
+  justify-content: space-between;
   margin-bottom: 5%;
   font-size: 2vw;
+  align-items: baseline;
+}
+
+header > h5 {
+  padding: 0;
+  margin: 0;
+  margin: 0 2%;
+  color: #fff;
 }
 
 header a {
   margin: 0 2%;
   text-decoration: none;
-  color: white;
+  color: #fff;
 }
 
 header a:hover {
-  color: red;
+  color: #777;
 }
 
 article.formContine {
@@ -108,6 +116,7 @@ th {
 tbody td {
   color: #777;
   background: #25252b;
+  font-family: IRANSansWeb;
 }
 
 caption, .user th, .user td {
@@ -133,5 +142,5 @@ td:nth-child(2){
 
 @font-face {
   font-family: IRANSansWeb;
-  src: url(../fonts/IRANSansWeb.eot) format(eot), url(../fonts/IRANSansWeb.ttf) format(ttf), url(../fonts/IRANSansWeb.woff) format(woff);
+  src: url(../fonts/IRANSansWeb.eot) format(eot), url(../fonts/IRANSansWeb.ttf) format(ttf), url(../fonts/IRANSansWeb.woff) format(woff), url(../fonts/IRANSansWeb.woff2) format(woff2);
 }
