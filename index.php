@@ -9,6 +9,7 @@
     
     <article>
       <header>
+        <h5><?php echo date("l, M d, Y") ?></h5>
         <a href="form.html" target="_blank">پروژه فرم</a>
       </header>
     </article>
@@ -37,6 +38,10 @@
         </div>
       </form>
     </article>
+
+    <?php 
+      $Users = [['مهدی عابدی', 20, 'اصفهان'], ['حسین مرادی', 37, 'تهران'], ['محمد یاسینی', 24, 'یاسوج'], ['علی فتحی', 18, 'گرگان'], ['حامد میرعلائی', 27, 'کاشان']];
+    ?>
     
     <table class="user">
       <thead>
@@ -52,30 +57,37 @@
         <tr>
           <td><button type="button" class="del">حذف</button></td>
           <td><button type="button" class="edit">ویرایش</button></td>
-          <td>اصفهان</td>
-          <td>20</td>
-          <td>مهدی عابدی</td>
+          <td><?php echo $Users[0][2] ?></td>
+          <td><?php echo $Users[0][1] ?></td>
+          <td><?php echo $Users[0][0] ?></td>
         </tr>
         <tr>
           <td><button type="button" class="del">حذف</button></td>
           <td><button type="button" class="edit">ویرایش</button></td>
-          <td>یاسوج</td>
-          <td>18</td>
-          <td>حسین مرادی</td>
+          <td><?php echo $Users[1][2] ?></td>
+          <td><?php echo $Users[1][1] ?></td>
+          <td><?php echo $Users[1][0] ?></td>
         </tr>
         <tr>
           <td><button type="button" class="del">حذف</button></td>
           <td><button type="button" class="edit">ویرایش</button></td>
-          <td>تهران</td>
-          <td>27</td>
-          <td>محمد رضا یاسینی</td>
+          <td><?php echo $Users[2][2] ?></td>
+          <td><?php echo $Users[2][1] ?></td>
+          <td><?php echo $Users[2][0] ?></td>
         </tr>
         <tr>
           <td><button type="button" class="del">حذف</button></td>
           <td><button type="button" class="edit">ویرایش</button></td>
-          <td>کرمان</td>
-          <td>31</td>
-          <td>حامد یعقوبی</td>
+          <td><?php echo $Users[3][2] ?></td>
+          <td><?php echo $Users[3][1] ?></td>
+          <td><?php echo $Users[3][0] ?></td>
+        </tr>
+        <tr>
+          <td><button type="button" class="del">حذف</button></td>
+          <td><button type="button" class="edit">ویرایش</button></td>
+          <td><?php echo $Users[4][2] ?></td>
+          <td><?php echo $Users[4][1] ?></td>
+          <td><?php echo $Users[4][0] ?></td>
         </tr>
       </tbody>
     </table>
@@ -233,10 +245,13 @@
         }
       });
 
-      // $(document).on('click', '#reset', function () {
-      //   document.getElementById('change').hidden = true;
-      //   document.getElementById('register').hidden = false;
-      // });
+      // document.getElementById('reset').addEventListener('click', function () {
+      //   if (document.getElementById('register').hidden == true) {
+      //     document.getElementById('change').hidden = true;
+      //     document.getElementById('register').hidden = false;
+      //   }
+        
+      // })
       
     </script>
    
