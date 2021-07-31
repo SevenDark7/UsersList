@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Project2</title>
   </head>
@@ -10,7 +11,8 @@
     <article>
       <header>
         <h5><?php echo date("l, M d, Y") ?></h5>
-        <a href="form.html" target="_blank">پروژه فرم</a>
+        <a href="form.html" target="_blank">صفحه ورود</a>
+        <a href="signup.html" target="_blank">صفحه ثبت نام</a>
       </header>
     </article>
 

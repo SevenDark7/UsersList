@@ -142,5 +142,5 @@ td:nth-child(2){
 
 @font-face {
   font-family: IRANSansWeb;
-  src: url(../fonts/IRANSansWeb.eot) format(eot), url(../fonts/IRANSansWeb.ttf) format(ttf), url(../fonts/IRANSansWeb.woff) format(woff), url(../fonts/IRANSansWeb.woff2) format(woff2);
+  src: url(../fonts/IRANSansWeb.eot) format("eot"), url(../fonts/IRANSansWeb.ttf) format("ttf"), url(../fonts/IRANSansWeb.woff) format("woff"), url(../fonts/IRANSansWeb.woff2) format("woff2");
 }
