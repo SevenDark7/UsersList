@@ -1,10 +1,11 @@
-section.body {
+article.first {
     display: flex;
 }
 
 main {
     display: flex;
     flex-basis: 60%;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -22,7 +23,7 @@ aside {
 }
 
 aside h2 {
-    margin-left: 3%;
+    /* margin-left: 3%; */
     font-size: 2vw;
 }
 
@@ -39,21 +40,19 @@ input {
     /* padding: 7% 30%; */
     font-size: 3vh;
     padding-bottom: 2%;
+    margin-left: 5%;
 }
 
 label {
-    font-size: 3vh;
+    font-size: 2vh;
+    margin-left: 5%;
 }
 
 input[type="checkbox"] {
-    margin: 0 5%;
+    margin: 0;
     width: 24px;
     height: 20px;
     cursor: pointer;
-}
-
-i {
-    padding: 0 5%;
 }
 
 input:focus {
@@ -61,9 +60,24 @@ input:focus {
     box-shadow: 0 1px 1px black;
 }
 
+article.secound {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+}
+
 button {
-    margin-left: 5%;
-    padding: 2% 4%;
+    padding: 1vh 2vh;
     font-size: 2vh;
     cursor: pointer;
+}
+
+article h4 {
+    margin: 0;
+    padding: 0;
+}
+
+article a {
+    text-decoration: none;
+    color: #1485b9
 }
