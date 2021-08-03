@@ -1,3 +1,23 @@
+//////////// Display Time In Header //////////// 
+
+setInterval(function() {
+  var currentTime = new Date();
+  var secounds = currentTime.getSeconds();
+  var minutes = currentTime.getMinutes();
+  var hours = currentTime.getHours();
+
+  secounds = (secounds < 10 ? "0" : "") + secounds;
+  minutes = (minutes < 10 ? "0" : "") + minutes;
+  hours = (hours < 10 ? "0" : "") + hours;
+
+  var fullTime = hours + " : " + minutes + " : " + secounds;
+  $(".time").text(fullTime);
+  
+}, 1000);
+
+
+//////////// Button Events ////////////
+
 document.getElementById('change').hidden = true;
 document.querySelector('#register').addEventListener('click', function() {
   let username = document.getElementById('userName').value;
@@ -91,7 +111,7 @@ document.getElementById('change').addEventListener('click', function() {
 
 
 
-//////////////// JQuery Codes ////////////////
+//////////// JQuery Codes ////////////
 
 // $(document).ready(function() {
 //     $("#change").hide();

@@ -10,7 +10,7 @@
     
     <article>
       <header>
-        <h5><?php echo date("l, M d, Y") ?></h5>
+        <h5 class="time"></h5>
         <a href="form.html" target="_blank">صفحه ورود</a>
         <a href="signup.html" target="_blank">صفحه ثبت نام</a>
       </header>
