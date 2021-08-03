@@ -49,6 +49,18 @@
                       ['حامد میرعلائی', 27, 'کاشان'],
                       ['محسن امینی', 43, 'کرمان']
                     );
+
+    /////////// Write User Information In CSV File ///////////
+
+      if (!file_exists('csv')){
+        mkdir('csv');
+      }
+      if (!file_exists('csv/users.csv')) {
+        $csvFile = fopen('csv/users.csv', 'w');
+        foreach ($Users as $user) {
+          fputcsv($csvFile, $user);
+        }
+      }
     ?>
     
     <table class="user">
@@ -64,17 +76,38 @@
       <tbody class="users">
         <!-- Read User Information From The Array -->
       <?php
-      foreach($Users as $user) {
+      // foreach($Users as $user) {
+      //   echo "
+      //     <tr>
+      //       <td><button type='button' class='del'>حذف</button></td>
+      //       <td><button type='button' class='edit'>ویرایش</button></td>
+      //       <td>{$user[2]}</td>
+      //       <td>{$user[1]}</td>
+      //       <td>{$user[0]}</td>
+      //     </tr>";
+      // }
+
+
+      $csvFile = fopen('csv/users.csv', 'r');
+      while(!feof($csvFile)) {
+        $data = fgetcsv($csvFile);
+        if(empty($data))
+          break;
+
         echo "
           <tr>
             <td><button type='button' class='del'>حذف</button></td>
             <td><button type='button' class='edit'>ویرایش</button></td>
-            <td>{$user[2]}</td>
-            <td>{$user[1]}</td>
-            <td>{$user[0]}</td>
-          </tr>";
+            <td>$data[2]</td>
+            <td>$data[1]</td>
+            <td>$data[0]</td>
+          </tr>
+        ";
       }
+      
       ?>
+
+
       </tbody>
     </table>
 
