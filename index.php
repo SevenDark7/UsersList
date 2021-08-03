@@ -42,7 +42,13 @@
     </article>
 
     <?php 
-      $Users = [['مهدی عابدی', 20, 'اصفهان'], ['حسین مرادی', 37, 'تهران'], ['محمد یاسینی', 24, 'یاسوج'], ['علی فتحی', 18, 'گرگان'], ['حامد میرعلائی', 27, 'کاشان'], ['محسن امینی', 43, 'کرمان']];
+      $Users = array( ['مهدی عابدی', 20, 'اصفهان'],
+                      ['حسین مرادی', 37, 'تهران'],
+                      ['محمد یاسینی', 24, 'یاسوج'],
+                      ['علی فتحی', 18, 'گرگان'],
+                      ['حامد میرعلائی', 27, 'کاشان'],
+                      ['محسن امینی', 43, 'کرمان']
+                    );
     ?>
     
     <table class="user">
@@ -91,6 +97,22 @@
           <td><?php //echo $Users[4][1] ?></td>
           <td><?php //echo $Users[4][0] ?></td>
         </tr> -->
+
+        <!-- Read User Information From The Array -->
+      <?php
+      foreach($Users as $user) {
+        echo "
+          <tr>
+            <td><button type='button' class='del'>حذف</button></td>
+            <td><button type='button' class='edit'>ویرایش</button></td>
+            <td>{$user[0]}</td>
+            <td>{$user[1]}</td>
+            <td>{$user[2]}</td>
+          </tr>";
+      }
+      ?>
+
+
       </tbody>
     </table>
 
@@ -155,28 +177,6 @@
       });
     </script> -->
 
-
-    <!-- Read User Information From The Array -->
-    <?php
-    foreach(array_reverse($Users) as $User) {
-    ?>
-      <script>
-        var userRow = $("<tr></tr>").prependTo(".users");
-        var deleteData = $("<td></td>").appendTo(userRow);
-        $("<button></button>").addClass("del").attr("type", "button").text("حذف").appendTo(deleteData);
-        var editData = $("<td></td>").appendTo(userRow);
-        $("<button></button>").addClass("edit").attr("type", "button").text("ویرایش").appendTo(editData);
-      </script>
-      <?php
-      foreach(array_reverse($User) as $Item) {
-      ?>
-        <script>
-          $("<td></td>").text("<?php echo $Item; ?>").appendTo(userRow);
-        </script>
-    <?php
-      }
-    }
-    ?>
 
     <script>
       document.getElementById('change').hidden = true;
