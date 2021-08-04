@@ -17,25 +17,25 @@
     </article>
 
     <article class="formContine">
-      <form class="inputForm" action="#">
+      <form class="inputForm" action="index.php" method="post">
         <div class="name">
           <label for="nameLabel">نام و نام خانوادگی</label>
-          <input type="text" id="userName" placeholder="مثال: مهدی عابدی" autofocus> 
+          <input type="text" id="userName" name="userName" autocomplete="off" placeholder="مثال: مهدی عابدی" autofocus> 
         </div>
 
         <div class="age">
           <label for="ageLabel">سن</label>
-          <input type="number" id="userAge" placeholder="مثال: 20">
+          <input type="number" id="userAge" name="userAge" placeholder="مثال: 20">
         </div>
         
         <div class="city">
           <label for="cityLabel">شهر</label>
-          <input type="text" id="userCity" placeholder="مثال: اصفهان">
+          <input type="text" id="userCity" name="userCity" placeholder="مثال: اصفهان">
         </div>
-        
+    
         <div class="btn">
           <button type="reset" id="reset">انصراف</button>
-          <button type="button" id="register">ثبت</button>
+          <button type="submit" id="register">ثبت</button>
           <button type="button" id="change">ویرایش</button>
         </div>
       </form>
@@ -50,16 +50,25 @@
                       ['محسن امینی', 43, 'کرمان']
                     );
 
-    /////////// Write User Information In CSV File ///////////
+      /////////// Write User Information In CSV File ///////////
 
       if (!file_exists('csv')){
         mkdir('csv');
-      }
-      if (!file_exists('csv/users.csv')) {
         $csvFile = fopen('csv/users.csv', 'w');
         foreach ($Users as $user) {
           fputcsv($csvFile, $user);
         }
+        fclose($csvFile);
+      }
+
+
+      /////////// Get User Information From Form And Write In CSV File ///////////
+
+      if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
+        $info = [$_POST['userName'], $_POST['userAge'], $_POST['userCity']];
+        $csvFile = fopen('csv/users.csv', 'a');
+        fputcsv($csvFile, $info);
+        fclose($csvFile);
       }
     ?>
     
@@ -74,46 +83,33 @@
         </tr>
       </thead>
       <tbody class="users">
-        <!-- Read User Information From The Array -->
-      <?php
-      // foreach($Users as $user) {
-      //   echo "
-      //     <tr>
-      //       <td><button type='button' class='del'>حذف</button></td>
-      //       <td><button type='button' class='edit'>ویرایش</button></td>
-      //       <td>{$user[2]}</td>
-      //       <td>{$user[1]}</td>
-      //       <td>{$user[0]}</td>
-      //     </tr>";
-      // }
 
+        <?php
+        $csvFile = fopen('csv/users.csv', 'r');
+        while(!feof($csvFile)) {
+          $data = fgetcsv($csvFile);
+          if(empty($data))
+            break;
 
-      $csvFile = fopen('csv/users.csv', 'r');
-      while(!feof($csvFile)) {
-        $data = fgetcsv($csvFile);
-        if(empty($data))
-          break;
-
-        echo "
-          <tr>
-            <td><button type='button' class='del'>حذف</button></td>
-            <td><button type='button' class='edit'>ویرایش</button></td>
-            <td>$data[2]</td>
-            <td>$data[1]</td>
-            <td>$data[0]</td>
-          </tr>
-        ";
-      }
-      
-      ?>
+          echo "
+            <tr>
+              <td><button type='button' class='del'>حذف</button></td>
+              <td><button type='button' class='edit'>ویرایش</button></td>
+              <td>$data[2]</td>
+              <td>$data[1]</td>
+              <td>$data[0]</td>
+            </tr>
+          ";
+        }
+        ?>
 
 
       </tbody>
     </table>
 
 
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/main.js"></script>
+    <!-- <script src="js/jquery-3.6.0.min.js"></script> -->
+    <!-- <script src="js/main.js"></script> -->
     
   </body>
 </html>
