@@ -29,17 +29,6 @@
       fclose($csvFile);
     }
 
-    /////////// Get User Information From Form And Write In CSV File ///////////
-
-    if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
-      $csvFile = file('csv/users.csv');
-      $count = count($csvFile);
-      $info = [++$count, $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
-      $csvFile = fopen('csv/users.csv', 'a');
-      fputcsv($csvFile, $info);
-      fclose($csvFile);
-    }
-
     /////////// Add Delete And Edit Event Using PHP ///////////
 
     if (isset($_GET['line'])) {
@@ -76,7 +65,47 @@
         }
         fclose($csvFile);
       }
+
+      if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
+        $id = $_GET['line'];
+        if (str_contains($id, 'e')) {
+          $id = trim($id, "e");
+          $edited = [$_POST['userName'], $_POST['userAge'], $_POST['userCity']];
+          $remaining = array();
+          $csvFile = fopen('csv/users.csv', 'r');
+          while (!feof($csvFile)) {
+            $line = fgetcsv($csvFile);
+            if (empty($line))
+              break;
+            if (($line[0] != $id)) {
+              array_push($remaining, $line);
+            }
+            else {
+              array_push($remaining, $edited);
+            }
+          }
+          fclose($csvFile);
+          $csvFile = fopen('csv/users.csv', 'w');
+          foreach($remaining as $users) {
+            fputcsv($csvFile, $users);
+          }
+          fclose($csvFile);
+          header('url=index.php');
+        }
+      }
     }
+
+    /////////// Get User Information From Form And Write In CSV File ///////////
+
+    if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
+      $csvFile = file('csv/users.csv');
+      $count = count($csvFile);
+      $info = [++$count, $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
+      $csvFile = fopen('csv/users.csv', 'a');
+      fputcsv($csvFile, $info);
+      fclose($csvFile);
+    }
+
     ?>
     
     <article>
