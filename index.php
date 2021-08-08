@@ -49,10 +49,10 @@
           fputcsv($csvFile, $item);
         }
         fclose($csvFile);
-        header("Refresh:0; url=index.php");
+        header('Location: index.php');
       }
       else {
-        $id = trim($id, "e");
+        $id = trim($id, 'e');
         $csvFile = fopen('csv/users.csv', 'r');
         while(!feof($csvFile)) {
           $row = fgetcsv($csvFile);
@@ -65,47 +65,78 @@
         }
         fclose($csvFile);
       }
-
-      if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
-        $id = $_GET['line'];
-        if (str_contains($id, 'e')) {
-          $id = trim($id, "e");
-          $edited = [$_POST['userName'], $_POST['userAge'], $_POST['userCity']];
-          $remaining = array();
-          $csvFile = fopen('csv/users.csv', 'r');
-          while (!feof($csvFile)) {
-            $line = fgetcsv($csvFile);
-            if (empty($line))
-              break;
-            if (($line[0] != $id)) {
-              array_push($remaining, $line);
-            }
-            else {
-              array_push($remaining, $edited);
-            }
-          }
-          fclose($csvFile);
-          $csvFile = fopen('csv/users.csv', 'w');
-          foreach($remaining as $users) {
-            fputcsv($csvFile, $users);
-          }
-          fclose($csvFile);
-          header('url=index.php');
-        }
-      }
     }
 
-    /////////// Get User Information From Form And Write In CSV File ///////////
+    // if (isset($etRow)) {
+    //   echo 'Yes';
+    //   if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
+    //     $edited = [$etRow[0], $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
+    //     $remaining = array();
+    //     $csvFile = fopen('csv/users.csv', 'r');
+    //     while (!feof($csvFile)) {
+    //       $line = fgetcsv($csvFile);
+    //       if (empty($line))
+    //         break;
+    //       elseif (($line[0] == $edited[0])) 
+    //         array_push($remaining, $edited);   
+    //       else 
+    //         array_push($remaining, $line);
+    //     }
+    //     fclose($csvFile);
+    //     $csvFile = fopen('csv/users.csv', 'w');
+    //     foreach($remaining as $users) {
+    //       fputcsv($csvFile, $users);
+    //     }
+    //     fclose($csvFile);
+    //   }
+    // } else {
+    //   if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
+    //     echo 'No';
+    //     $csvFile = file('csv/users.csv');
+    //     $count = count($csvFile);
+    //     $info = [++$count, $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
+    //     $csvFile = fopen('csv/users.csv', 'a');
+    //     fputcsv($csvFile, $info);
+    //     fclose($csvFile);
+    //   }
+    // }
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
-      $csvFile = file('csv/users.csv');
-      $count = count($csvFile);
-      $info = [++$count, $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
-      $csvFile = fopen('csv/users.csv', 'a');
-      fputcsv($csvFile, $info);
-      fclose($csvFile);
-    }
-
+      if (isset($_GET['line'])) {
+        echo 'yes';
+        $id = trim($_GET['line'], 'e');
+        $edited = [$id, $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
+        $remaining = array();
+        $csvFile = fopen('csv/users.csv', 'r');
+        while (!feof($csvFile)) {
+          $line = fgetcsv($csvFile);
+          if (empty($line))
+            break;
+          elseif (($line[0] == $edited[0])) 
+            array_push($remaining, $edited);   
+          else 
+            array_push($remaining, $line);
+        }
+        fclose($csvFile);
+        $csvFile = fopen('csv/users.csv', 'w');
+        foreach($remaining as $users) {
+          fputcsv($csvFile, $users);
+        }
+        fclose($csvFile);
+      }
+      else {
+        echo "No";
+        $csvFile = file('csv/users.csv');
+        $count = count($csvFile);
+        $info = [++$count, $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
+        $csvFile = fopen('csv/users.csv', 'a');
+        fputcsv($csvFile, $info);
+        fclose($csvFile);
+      }
+    } 
+    /////////// Get User Information From Form And Write In CSV File ///////////
     ?>
     
     <article>
