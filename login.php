@@ -16,7 +16,7 @@
         if (empty($user)) {
           fclose($csvFile);
     ?>
-          <script>alert('کاربری با این نام یافت نشد')</script>
+          <script>alert('کاربری با این مشخصات یافت نشد')</script>
     <?php
           break;
         }
