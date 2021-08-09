@@ -67,46 +67,11 @@
       }
     }
 
-    // if (isset($etRow)) {
-    //   echo 'Yes';
-    //   if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
-    //     $edited = [$etRow[0], $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
-    //     $remaining = array();
-    //     $csvFile = fopen('csv/users.csv', 'r');
-    //     while (!feof($csvFile)) {
-    //       $line = fgetcsv($csvFile);
-    //       if (empty($line))
-    //         break;
-    //       elseif (($line[0] == $edited[0])) 
-    //         array_push($remaining, $edited);   
-    //       else 
-    //         array_push($remaining, $line);
-    //     }
-    //     fclose($csvFile);
-    //     $csvFile = fopen('csv/users.csv', 'w');
-    //     foreach($remaining as $users) {
-    //       fputcsv($csvFile, $users);
-    //     }
-    //     fclose($csvFile);
-    //   }
-    // } else {
-    //   if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
-    //     echo 'No';
-    //     $csvFile = file('csv/users.csv');
-    //     $count = count($csvFile);
-    //     $info = [++$count, $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
-    //     $csvFile = fopen('csv/users.csv', 'a');
-    //     fputcsv($csvFile, $info);
-    //     fclose($csvFile);
-    //   }
-    // }
-    
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////// Edit User ///////////
 
     if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
-      if (isset($_GET['line'])) {
-        echo 'yes';
-        $id = trim($_GET['line'], 'e');
+      if (isset($_GET['row'])) {
+        $id = $_GET['row'];
         $edited = [$id, $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
         $remaining = array();
         $csvFile = fopen('csv/users.csv', 'r');
@@ -125,9 +90,9 @@
           fputcsv($csvFile, $users);
         }
         fclose($csvFile);
-      }
+        header('Location: index.php');
+      } /////////// Get User Information From Form And Write In CSV File ///////////
       else {
-        echo "No";
         $csvFile = file('csv/users.csv');
         $count = count($csvFile);
         $info = [++$count, $_POST['userName'], $_POST['userAge'], $_POST['userCity']];
@@ -136,7 +101,7 @@
         fclose($csvFile);
       }
     } 
-    /////////// Get User Information From Form And Write In CSV File ///////////
+    
     ?>
     
     <article>
@@ -148,7 +113,7 @@
     </article>
 
     <article class="formContine">
-      <form class="inputForm" action="index.php" method="post">
+      <form class="inputForm" action="index.php<?php if (isset($etRow)) echo '?row=' . $etRow[0]; ?>" method="post">
         <div class="name">
           <label for="nameLabel">نام و نام خانوادگی</label>
           <input type="text" id="userName" name="userName" value="<?php if (isset($etRow)) echo $etRow[1]; ?>" autocomplete="off" placeholder="مثال: مهدی عابدی" autofocus> 
