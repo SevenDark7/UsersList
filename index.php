@@ -33,6 +33,11 @@
 
     if (isset($_GET['line'])) {
       $id = $_GET['line'];
+      if (!function_exists('str_contains')) {
+        function str_contains($text, $needle) {
+          return empty($needle) || strpos($text, $needle) !== false;
+        }
+      }
       if (!str_contains($id, 'e')) {
         $remaining = array();
         $csvFile = fopen('csv/users.csv', 'r');
