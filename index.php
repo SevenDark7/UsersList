@@ -114,6 +114,7 @@
         <h5 class="time"></h5>
         <a href="form.html" target="_blank">صفحه ورود</a>
         <a href="signup.html" target="_blank">صفحه ثبت نام</a>
+        <button type="button" id="default">پیشفرض</button>
       </header>
     </article>
 
@@ -177,7 +178,34 @@
       </tbody>
     </table>
 
-    <!-- <script src="js/jquery-3.6.0.min.js"></script> -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#default').click(function () {
+          var url = 'def.php';
+          $.ajax(url, {
+            url: url,
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+              alert('Success');
+              $("tr").remove();
+              data.forEach(function(item, index) {
+                $('tbody').append('<tr>' + '<td>' + "<a href=index.php?line=" + item[0] +"><button type='button' class='del'>حذف</button></a>" + '</td>' +
+                '<td>' + "<a href=index.php?line=" + item[0] +"e><button type='button' class='del'>ویرایش</button></a>" + '</td>' +
+                '<td>' + item[3] + '</td>' + 
+                '<td>' + item[2] + '</td>' + 
+                '<td>' + item[1] + '</td>' + '</tr>');
+              });
+              
+            },
+            error: function() {
+              alert('Error');
+            },
+          });
+        });
+      });
+    </script>
     <!-- <script src="js/main.js"></script> -->
     
   </body>
