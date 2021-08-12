@@ -6,7 +6,7 @@ header {
   display: flex;
   background-color: #25252f;
   padding: 20px;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-bottom: 5%;
   font-size: 2vw;
   align-items: baseline;
@@ -84,7 +84,7 @@ button {
   cursor: pointer;
 }
 
-.del, .edit {
+.del, .edit, #default {
   font-size: 1.5vw;
   background-color: #2e2e36;
   border-color: white;
