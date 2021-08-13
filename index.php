@@ -10,13 +10,13 @@
 
     <?php
 
-    $Users = [
-      [1, 'مهدی عابدی', 20, 'اصفهان'],
-      [2, 'محمد ایزدی', 32, 'کرمان'],
-      [3, 'حامد محمدی', 18, 'تهران'],
-      [4, 'حسین حسینی', 27, 'کاشان'],
-      [5, 'علی یاسینی', 24, 'شیراز']
-    ];
+    // $Users = [
+    //   [1, 'مهدی عابدی', 20, 'اصفهان'],
+    //   [2, 'محمد ایزدی', 32, 'کرمان'],
+    //   [3, 'حامد محمدی', 18, 'تهران'],
+    //   [4, 'حسین حسینی', 27, 'کاشان'],
+    //   [5, 'علی یاسینی', 24, 'شیراز']
+    // ];
 
     /////////// Write User Information In CSV File ///////////
 
@@ -189,15 +189,14 @@
             type: 'POST',
             dataType: 'json',
             success: function (data) {
-              $("tr").remove();
-              data.forEach(function(item, index) {
+              $('tbody tr').remove();
+              data.forEach(function(item) {
                 $('tbody').append('<tr>' + '<td>' + "<a href=index.php?line=" + item[0] +"><button type='button' class='del'>حذف</button></a>" + '</td>' +
                 '<td>' + "<a href=index.php?line=" + item[0] +"e><button type='button' class='del'>ویرایش</button></a>" + '</td>' +
                 '<td>' + item[3] + '</td>' + 
                 '<td>' + item[2] + '</td>' + 
                 '<td>' + item[1] + '</td>' + '</tr>');
               });
-              alert('Default user table created successfully');
             },
             error: function() {
               alert('Error loading information');
@@ -213,7 +212,7 @@
             data: {"userName":$('#userName').val(), "userAge":$('#userAge').val(), "userCity":$('#userCity').val()},
             dataType: "json",
             success: function (data) {
-              $("tr").remove();
+              $('tbody tr').remove();
               data.forEach(function(item, index) {
                 $('tbody').append('<tr>' + '<td>' + "<a href=index.php?line=" + item[0] +"><button type='button' class='del'>حذف</button></a>" + '</td>' +
                 '<td>' + "<a href=index.php?line=" + item[0] +"e><button type='button' class='del'>ویرایش</button></a>" + '</td>' +
@@ -222,11 +221,36 @@
                 '<td>' + item[1] + '</td>' + '</tr>');
               });
               $("#reset").click();
-              alert('New user registered successfully');
-
+              $('#userName').focus();
             },
             error: function() {
               alert('Error registering user');
+            },
+          });
+        });
+
+        $(document).on('click', '.del', function(e) {
+          e.preventDefault();
+          var row = $(this).parent().attr('href');
+          row = row.split('=');
+          var user = {'row':row[1]};
+          $.ajax({
+            url: 'dlt.php',
+            type: 'POST',
+            data: user,
+            dataType: 'json',
+            success: function(data) {
+              $('tbody tr').remove();
+              data.forEach(function(item) {
+                $('tbody').append('<tr>' + '<td>' + "<a href=index.php?line=" + item[0] +"><button type='button' class='del'>حذف</button></a>" + '</td>' +
+                '<td>' + "<a href=index.php?line=" + item[0] +"e><button type='button' class='del'>ویرایش</button></a>" + '</td>' +
+                '<td>' + item[3] + '</td>' + 
+                '<td>' + item[2] + '</td>' + 
+                '<td>' + item[1] + '</td>' + '</tr>');
+              });
+            },
+            error: function() {
+              alert('Error loading users');
             },
           });
         });
