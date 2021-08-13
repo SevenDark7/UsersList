@@ -113,8 +113,8 @@
     <article>
       <header>
         <h5 class="time"></h5>
-        <a href="form.html" target="_blank">صفحه ورود</a>
-        <a href="signup.html" target="_blank">صفحه ثبت نام</a>
+        <a href="login.php" target="_blank">صفحه ورود</a>
+        <a href="signup.php" target="_blank">صفحه ثبت نام</a>
         <button type="button" id="default">پیشفرض</button>
       </header>
     </article>
@@ -167,7 +167,7 @@
           echo "
             <tr>
               <td><a href='index.php?line=$data[0]'><button type='button' class='del'>حذف</button></a></td>
-              <td><a href='index.php?line=$data[0]e'><button type='button' class='edit'>ویرایش</button></a></td>
+              <td><a href='index.php?line=$data[0]'><button type='button' class='edit'>ویرایش</button></a></td>
               <td>$data[3]</td>
               <td>$data[2]</td>
               <td>$data[1]</td>
@@ -175,99 +175,11 @@
           ";
         }
         ?>
-
       </tbody>
     </table>
 
     <script src="js/jquery-3.6.0.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $('#default').click(function () {
-          var url = 'def.php';
-          $.ajax(url, {
-            url: url,
-            type: 'POST',
-            dataType: 'json',
-            success: function (data) {
-              $('tbody tr').remove();
-              data.forEach(function(item) {
-                $('tbody').append('<tr>' + '<td>' + "<a href=index.php?line=" + item[0] +"><button type='button' class='del'>حذف</button></a>" + '</td>' +
-                '<td>' + "<a href=index.php?line=" + item[0] +"e><button type='button' class='del'>ویرایش</button></a>" + '</td>' +
-                '<td>' + item[3] + '</td>' + 
-                '<td>' + item[2] + '</td>' + 
-                '<td>' + item[1] + '</td>' + '</tr>');
-              });
-            },
-            error: function() {
-              alert('Error loading information');
-            },
-          });
-        });
-
-        $("#register").click(function(e) {
-          e.preventDefault();
-          $.ajax('reg.php', {
-            url: 'reg.php',
-            type: "POST",
-            data: {"userName":$('#userName').val(), "userAge":$('#userAge').val(), "userCity":$('#userCity').val()},
-            dataType: "json",
-            success: function (data) {
-              $('tbody tr').remove();
-              data.forEach(function(item, index) {
-                $('tbody').append('<tr>' + '<td>' + "<a href=index.php?line=" + item[0] +"><button type='button' class='del'>حذف</button></a>" + '</td>' +
-                '<td>' + "<a href=index.php?line=" + item[0] +"e><button type='button' class='del'>ویرایش</button></a>" + '</td>' +
-                '<td>' + item[3] + '</td>' + 
-                '<td>' + item[2] + '</td>' + 
-                '<td>' + item[1] + '</td>' + '</tr>');
-              });
-              $("#reset").click();
-              $('#userName').focus();
-            },
-            error: function() {
-              alert('Error registering user');
-            },
-          });
-        });
-
-        $(document).on('click', '.del', function(e) {
-          e.preventDefault();
-          var row = $(this).parent().attr('href');
-          row = row.split('=');
-          var user = {'row':row[1]};
-          $.ajax({
-            url: 'dlt.php',
-            type: 'POST',
-            data: user,
-            dataType: 'json',
-            success: function(data) {
-              $('tbody tr').remove();
-              data.forEach(function(item) {
-                $('tbody').append('<tr>' + '<td>' + "<a href=index.php?line=" + item[0] +"><button type='button' class='del'>حذف</button></a>" + '</td>' +
-                '<td>' + "<a href=index.php?line=" + item[0] +"e><button type='button' class='del'>ویرایش</button></a>" + '</td>' +
-                '<td>' + item[3] + '</td>' + 
-                '<td>' + item[2] + '</td>' + 
-                '<td>' + item[1] + '</td>' + '</tr>');
-              });
-            },
-            error: function() {
-              alert('Error loading users');
-            },
-          });
-        });
-
-        setInterval(function() {
-          var currentTime = new Date();
-          var secounds = currentTime.getSeconds();
-          var minutes = currentTime.getMinutes();
-          var hours = currentTime.getHours();
-          secounds = (secounds < 10 ? "0" : "") + secounds;
-          minutes = (minutes < 10 ? "0" : "") + minutes;
-          hours = (hours < 10 ? "0" : "") + hours;
-          var fullTime = hours + " : " + minutes + " : " + secounds;
-          $(".time").text(fullTime);
-        }, 1000);
-      });
-    </script>
+    <script src="js/ajx.js"></script>
     <!-- <script src="js/main.js"></script> -->
     
   </body>
