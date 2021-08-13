@@ -1,3 +1,5 @@
+////////////////// Set Time In Header //////////////////
+
 $(document).ready(function () {
     setInterval(function() {
       var currentTime = new Date();
@@ -10,6 +12,8 @@ $(document).ready(function () {
       var fullTime = hours + " : " + minutes + " : " + secounds;
       $(".time").text(fullTime);
     }, 1000);
+
+////////////////// Return To Default Users Event //////////////////
 
     $('#default').click(function () {
       var url = 'def.php';
@@ -32,6 +36,8 @@ $(document).ready(function () {
         },
       });
     });
+
+////////////////// Register A New User Event //////////////////
 
     $(document).on('click', '#register', function(e) {
       e.preventDefault();
@@ -60,6 +66,8 @@ $(document).ready(function () {
       });
     });
 
+////////////////// Delete User Event //////////////////
+
     $(document).on('click', '.del', function(e) {
       e.preventDefault();
       var row = $(this).parent().attr('href');
@@ -85,6 +93,8 @@ $(document).ready(function () {
         },
       });
     });
+
+////////////////// Edit User Event //////////////////
 
     let id;
 
@@ -145,7 +155,9 @@ $(document).ready(function () {
       }
     });
 
-    $(document).on('click', '#reset', function(e) {
+////////////////// Reset Button Event //////////////////
+
+    $(document).on('click', '#reset', function() {
         $("#change").attr('id', 'register');
     });
   });
