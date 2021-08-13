@@ -1,5 +1,5 @@
 <?php
-$name = isset($_POST['userName']) ? $_POST['userName'] : 'No Name Given';
+$name = isset($_POST['userName']) ? $_POST['userName'] : 'No Name';
 $age = isset($_POST['userAge']) ? $_POST['userAge'] : 'No Age';
 $city = isset($_POST['userCity']) ? $_POST['userCity'] : 'No City';
 
