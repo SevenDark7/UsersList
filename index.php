@@ -178,6 +178,11 @@
       </tbody>
     </table>
 
+    <div class="panel">
+      <h3 id="subject"></h3>
+      <p id="text"></p>
+    </div>
+
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/ajx.js"></script>
     <!-- <script src="js/main.js"></script> -->

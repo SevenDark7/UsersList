@@ -140,6 +140,21 @@ td:nth-child(2){
   text-align: center;
 }
 
+div.panel {
+  border: 1px solid white !important;
+  border-radius: 5px;
+  background: rgba(3, 7, 14, 0.705);
+  float: right;
+  right: 1em;
+  bottom: 1em;
+  position: fixed;
+  color: white;
+  text-align: center;
+  padding: 0.5em 1em;
+  z-index: 100;
+  display: none;
+}
+
 @font-face {
   font-family: IRANSansWeb;
   src: url(../fonts/IRANSansWeb.eot) format("eot"), url(../fonts/IRANSansWeb.ttf) format("ttf"), url(../fonts/IRANSansWeb.woff) format("woff"), url(../fonts/IRANSansWeb.woff2) format("woff2");

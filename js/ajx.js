@@ -31,9 +31,24 @@ $(document).ready(function () {
             '<td>' + item[2] + '</td>' + 
             '<td>' + item[1] + '</td>' + '</tr>');
           });
+          $('.panel').toggle('slide');
+          setTimeout(function() {
+            if ($('.panel').attr('display') != 'none') {
+              $('.panel').toggle('slide');
+            }
+          }, 2000);
+          $('#subject').text('Default Users Loaded');
+          $('#text').text('لیست کاربران پیشفرض با موفقیت بارگیری شد');
         },
         error: function() {
-          alert('Error loading information');
+          $('.panel').toggle('slide');
+          setTimeout(function() {
+            if ($('.panel').attr('display') != 'none') {
+              $('.panel').toggle('slide');
+            }
+          }, 2000);
+          $('#subject').text('Error Loading');
+          $('#text').text('خطا در بارگیری لیست کاربران پیشفرض');
         },
       });
     });
@@ -60,9 +75,25 @@ $(document).ready(function () {
           $("#userAge").val('');
           $("#userCity").val('');
           $("#userName").focus();
+
+          $('.panel').toggle('slide');
+          setTimeout(function() {
+            if ($('.panel').attr('display') != 'none') {
+              $('.panel').toggle('slide');
+            }
+          }, 2000);
+          $('#subject').text('Register User Successfuly');
+          $('#text').text('کاربر جدید با موفقیت ثبت شد');
         },
         error: function() {
-          alert('Error registering user');
+          $('.panel').toggle('slide');
+          setTimeout(function() {
+            if ($('.panel').attr('display') != 'none') {
+              $('.panel').toggle('slide');
+            }
+          }, 2000);
+          $('#subject').text('Error Registration');
+          $('#text').text('خطا در ثبت کاربر جدید');
         },
       });
     });
@@ -88,9 +119,24 @@ $(document).ready(function () {
             '<td>' + item[2] + '</td>' + 
             '<td>' + item[1] + '</td>' + '</tr>');
           });
+          $('.panel').toggle('slide');
+          setTimeout(function() {
+            if ($('.panel').attr('display') != 'none') {
+              $('.panel').toggle('slide');
+            }
+          }, 2000);
+          $('#subject').text('Delete User Successfuly');
+          $('#text').text('کاربر منتخب با موفقیت حذف شد');
         },
         error: function() {
-          alert('Error loading users');
+          $('.panel').toggle('slide');
+          setTimeout(function() {
+            if ($('.panel').attr('display') != 'none') {
+              $('.panel').toggle('slide');
+            }
+          }, 2000);
+          $('#subject').text('Error Delete User');
+          $('#text').text('خطا در حذف کاربر');
         },
       });
     });
@@ -148,9 +194,24 @@ $(document).ready(function () {
               '<td>' + item[2] + '</td>' + 
               '<td>' + item[1] + '</td>' + '</tr>');
             });
+            $('.panel').toggle('slide');
+            setTimeout(function() {
+              if ($('.panel').attr('display') != 'none') {
+                $('.panel').toggle('slide');
+              }
+            }, 2000);
+            $('#subject').text('Edit User Successfuly');
+            $('#text').text('ویرایش کاربر با موفقیت انجام شد');
           },
           error: function() {
-            alert('Error edit user');
+            $('.panel').toggle('slide');
+            setTimeout(function() {
+              if ($('.panel').attr('display') != 'none') {
+                $('.panel').toggle('slide');
+              }
+            }, 2000);
+            $('#subject').text('Error Edit User');
+            $('#text').text('خطا در ویرایش کاربر');
           },
         });
       }
