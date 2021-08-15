@@ -16,10 +16,11 @@ $(document).ready(function () {
 ////////////////// Return To Default Users Event //////////////////
 
     $('#default').click(function () {
-      var url = 'def.php';
+      var url = 'ajx.php';
       $.ajax(url, {
         url: url,
         type: 'POST',
+        data: {'action' : 1},
         dataType: 'json',
         success: function (data) {
           $('tbody tr').remove();
@@ -41,10 +42,10 @@ $(document).ready(function () {
 
     $(document).on('click', '#register', function(e) {
       e.preventDefault();
-      $.ajax('reg.php', {
-        url: 'reg.php',
+      $.ajax('ajx.php', {
+        url: 'ajx.php',
         type: "POST",
-        data: {"userName":$('#userName').val(), "userAge":$('#userAge').val(), "userCity":$('#userCity').val()},
+        data: {'action' : 2, "userName":$('#userName').val(), "userAge":$('#userAge').val(), "userCity":$('#userCity').val()},
         dataType: "json",
         success: function (data) {
           $('tbody tr').remove();
@@ -72,9 +73,9 @@ $(document).ready(function () {
       e.preventDefault();
       var row = $(this).parent().attr('href');
       row = row.split('=');
-      var user = {'row':row[1]};
+      var user = {'action' : 3, 'row':row[1]};
       $.ajax({
-        url: 'dlt.php',
+        url: 'ajx.php',
         type: 'POST',
         data: user,
         dataType: 'json',
@@ -128,9 +129,9 @@ $(document).ready(function () {
         var userage = $("#userAge").val();
         var username = $("#userName").val();
         $.ajax({
-          url: 'edt.php',
+          url: 'ajx.php',
           type: 'POST',
-          data: {'id':id, 'name':username, 'age':userage, 'city':usercity},
+          data: {'action' : 4, 'id':id, 'name':username, 'age':userage, 'city':usercity},
           dataType: 'json',
           success: function(data) {
             $('tbody tr').remove();
