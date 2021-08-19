@@ -27,11 +27,53 @@
     }
     mysqli_select_db($connection, 'usersinfo');
     $SQL = "CREATE TABLE IF NOT EXISTS users (ID INT AUTO_INCREMENT PRIMARY KEY,
-     Name VARCHAR(255) NOT NULL, Age INT NOT NULL, City VARCHAR(255) NOT NULL)";
+     City VARCHAR(255) NOT NULL, Age INT NOT NULL, Name VARCHAR(255) NOT NULL)";
     if (! $table = mysqli_query($connection, $SQL)) {
       echo "Could not create table " . mysqli_error($connection);
     }
 /////////////////////////////////////////////////////////////////////
+
+/////////////////////// Insert New User To Table ///////////////////////
+
+    if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
+
+      $name = $_POST['userName'];
+      $age = (int)$_POST['userAge'];
+      $city = $_POST['userCity'];
+      mysqli_select_db($connection, 'usersinfo');
+      $stmt = mysqli_prepare($connection ,"INSERT INTO users (City, Age, Name) VALUES (?, ?, ?)");
+      mysqli_stmt_bind_param($stmt, 'sis', $city, $age, $name);
+      mysqli_stmt_execute($stmt);
+    }
+
+/////////////////////////////////////////////////////////////////////
+    
+/////////////////////// Select Informations From Table ///////////////////////
+
+    $SQL = "SELECT * FROM users";
+    $fetchUsers = mysqli_query($connection, $SQL);
+
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////// Delete User In Table ///////////////////////
+
+    if (isset($_GET['delete'])) {
+      $id = (int)$_GET['delete'];
+      mysqli_select_db($connection, 'userinfo');
+      $stmt = mysqli_prepare($connection,"DELETE FROM users WHERE ID = ?");
+      mysqli_stmt_bind_param($stmt, 'i', $id);
+      mysqli_stmt_execute($stmt);
+      header("Location: index.php");
+      return;
+    }
+
+/////////////////////////////////////////////////////////////////////
+
+    $usrs = mysqli_query($connection, 'SELECT * FROM users');
+    if (mysqli_num_rows($usrs) <= 0) {
+      mysqli_query($connection, 'ALTER TABLE users AUTO_INCREMENT = 1');
+    }
+
     ?>
 
 
@@ -48,17 +90,17 @@
       <form class="inputForm" action="index.php" method="post">
         <div class="name">
           <label for="nameLabel">نام و نام خانوادگی</label>
-          <input type="text" id="userName" autocomplete="off" placeholder="مثال: مهدی عابدی" autofocus> 
+          <input type="text" id="userName" name="userName" autocomplete="off" placeholder="مثال: مهدی عابدی" autofocus> 
         </div>
 
         <div class="age">
           <label for="ageLabel">سن</label>
-          <input type="number" id="userAge" placeholder="مثال: 20">
+          <input type="number" id="userAge" name="userAge" placeholder="مثال: 20">
         </div>
         
         <div class="city">
           <label for="cityLabel">شهر</label>
-          <input type="text" id="userCity" autocomplete="off" placeholder="مثال: اصفهان">
+          <input type="text" id="userCity" name="userCity" autocomplete="off" placeholder="مثال: اصفهان">
         </div>
     
         <div class="btn">
@@ -79,6 +121,21 @@
         </tr>
       </thead>
       <tbody class="users">
+        <?php
+        if ($fetchUsers) {
+          while ($user = mysqli_fetch_assoc($fetchUsers)) {
+            echo "
+              <tr>
+                <td><a href=index.php?delete=$user[ID]><button type=button class=del>حذف</button></a></td>
+                <td><a href=index.php?edit=$user[ID]><button type=button class=edit>ویرایش</button></a></td>
+                <td>$user[City]</td>
+                <td>$user[Age]</td>
+                <td>$user[Name]</td>
+              </tr>
+            ";
+          }
+        }
+        ?>
       </tbody>
     </table>
 
@@ -88,7 +145,7 @@
     </div>
 
     <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/ajx.js"></script>
+    <!-- <script src="js/ajx.js"></script> -->
     <!-- <script src="js/main.js"></script> -->
     
   </body>
