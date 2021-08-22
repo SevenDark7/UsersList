@@ -73,7 +73,7 @@
                 <h1>Edit User</h1>
             </div>
             <div>
-                <form action="edit.php<?php if (isset($_GET['edit'])) {echo '?edit=' . $_GET['edit'];}?>" method="post">
+                <form action="edit.php<?php if (isset($_GET['edit'])) {echo '?edit=' . $_GET['edit'];}?>" id="mainForm" method="post">
                     <div>
                         <fieldset>
                             <legend>Your Name</legend>
@@ -93,12 +93,26 @@
                         </fieldset>
                     </div>
                     <div class="row">
-                        <button type="submit">Edit</button>
+                        <button type="button" onclick="checkVal ()">Edit</button>
                         <button type="reset">Reset</button>
                     </div>  
                 </form>
             </div>
         </div>
     </section>
+
+    <script>
+        function checkVal () {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let city = document.getElementById("city").value;
+            if (name.trim().length < 1 || parseInt(age) < 1 || city.trim().length < 1) {
+                alert("لطفا مقادیر مربوطه را به صورت صحیح وارد کنید");
+            }
+            else {
+                document.getElementById("mainForm").submit();
+            }
+        }
+    </script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Project2</title>
-    <script src="js/jquery-3.6.0.min.js"></script>
+    <!-- <script src="js/jquery-3.6.0.min.js"></script> -->
   </head>
   <body>
 
@@ -88,7 +88,7 @@
     </article>
 
     <article class="formContine">
-      <form class="inputForm" action="index.php" method="post">
+      <form class="inputForm" id="mainForm" action="index.php" onsubmit="return checkVal()" method="post">
         <div class="name">
           <label for="nameLabel">نام و نام خانوادگی</label>
           <input type="text" id="userName" name="userName" autocomplete="off" placeholder="مثال: مهدی عابدی" autofocus> 
@@ -106,7 +106,7 @@
     
         <div class="btn">
           <button type="reset" id="reset">انصراف</button>
-          <button type="submit" id="register">ثبت</button>
+          <button type="button" id="register" onclick="checkVal()">ثبت</button>
         </div>
       </form>
     </article>
@@ -148,6 +148,26 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <!-- <script src="js/ajx.js"></script> -->
     <!-- <script src="js/main.js"></script> -->
+    <script>
+      function checkVal () {
+        let name = document.getElementById("userName").value;
+        let age = document.getElementById("userAge").value;
+        let city = document.getElementById("userCity").value;
+        if (name.trim().length < 1 || parseInt(age) < 1 || city.trim().length < 1) {
+          document.getElementById("subject"). innerHTML = "Invalid Data";
+          document.getElementById("text"). innerHTML = "لطفا مقادیر مربوطه را به صورت صحیح وارد کنید";
+          $('.panel').toggle('slide');
+          setTimeout(function() {
+            if ($('.panel').attr('display') != 'none') {
+              $('.panel').toggle('slide');
+            }
+          }, 2000);
+        }
+        else {
+          document.getElementById("mainForm").submit();
+        }
+      }
+    </script>
     
   </body>
 </html>
