@@ -29,8 +29,7 @@ div.container {
     text-align: center;
     font-size: 1.5em;
     padding-bottom: 0;
-    margin-bottom: 0;
-    margin-top: 10vh;
+    margin: 15vh 0 0 0;
 }
 
 img {
@@ -48,23 +47,20 @@ form {
     padding: 3%;
 }
 
-div.col {
+form > div {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    justify-content: center;
     padding: 2vh;
-}
-
-label {
-    margin-left: 35%;
-    font-size: 2vh;
-    margin-bottom: 1vh;
 }
 
 input {
     padding: 0.5vh 3vh;
     font-size: 2vh;
-    margin: auto;
+    border: none;
+}
+
+input:focus {
+    outline: none;
 }
 
 div.row {
@@ -77,4 +73,10 @@ button {
     padding: 1vh 2vh;
     font-size: 1.5vh;
     cursor: pointer;
+    box-shadow: 0 2px 1px gray, 0 3px 3px black;
+}
+
+button:active {
+    box-shadow: 0 1px 1px gray, 0 1px 1px black;
+    transform: translate(0, 5px);
 }
