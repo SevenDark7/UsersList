@@ -28,55 +28,21 @@
     mysqli_select_db($connection, 'usersinfo');
     $SQL = "CREATE TABLE IF NOT EXISTS users (ID INT AUTO_INCREMENT PRIMARY KEY,
      City VARCHAR(255) NOT NULL, Age INT NOT NULL, Name VARCHAR(255) NOT NULL)";
-    if (! $table = mysqli_query($connection, $SQL)) {
+    if (!$table = mysqli_query($connection, $SQL)) {
       echo "Could not create table " . mysqli_error($connection);
     }
 /////////////////////////////////////////////////////////////////////
 
-/////////////////////// Edit User In Table ///////////////////////
-
-    if (isset($_GET['edit'])) {
-      $id = (int)$_GET['edit'];
-      mysqli_select_db($connection, 'userinfo');
-      $stmt = mysqli_prepare($connection,"SELECT * FROM users WHERE ID = ?");
-      mysqli_stmt_bind_param($stmt, 'i', $id);
-      mysqli_stmt_execute($stmt);
-      $result = mysqli_stmt_get_result($stmt);
-      if ($result->num_rows == 0) {
-        header('Location: index.php');
-        return;
-      }
-      $user = mysqli_fetch_assoc($result);
-    }
-
-/////////////////////////////////////////////////////////////////////
-
-/////////////////////// Insert New User And Edit User To Table ///////////////////////
+/////////////////////// Insert New User To Table ///////////////////////
 
     if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
       $name = $_POST['userName'];
       $age = (int)$_POST['userAge'];
       $city = $_POST['userCity'];
-      if (isset($_GET['edit'])) {
-        $id = (int)$_GET['edit'];
-        mysqli_select_db($connection, 'userinfo');
-        $stmt = mysqli_prepare($connection,"UPDATE users SET City = ?, Age = ?, Name = ? WHERE ID = ?");
-        mysqli_stmt_bind_param($stmt, 'sisi', $city, $age, $name, $id);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        if ($result->num_rows == 0) {
-          header('Location: index.php');
-          return;
-        }
-        if (mysqli_affected_rows($connection)) {
-          header('Location: index.php');
-        }
-      }else {
-        mysqli_select_db($connection, 'usersinfo');
-        $stmt = mysqli_prepare($connection ,"INSERT INTO users (City, Age, Name) VALUES (?, ?, ?)");
-        mysqli_stmt_bind_param($stmt, 'sis', $city, $age, $name);
-        mysqli_stmt_execute($stmt);
-      }
+      mysqli_select_db($connection, 'usersinfo');
+      $stmt = mysqli_prepare($connection ,"INSERT INTO users (City, Age, Name) VALUES (?, ?, ?)");
+      mysqli_stmt_bind_param($stmt, 'sis', $city, $age, $name);
+      mysqli_stmt_execute($stmt);
     }
 
 /////////////////////////////////////////////////////////////////////
@@ -122,20 +88,20 @@
     </article>
 
     <article class="formContine">
-      <form class="inputForm" action="index.php<?php if (isset($_GET['edit'])) {echo '?edit=' . $_GET['edit'];}?>" method="post">
+      <form class="inputForm" action="index.php" method="post">
         <div class="name">
           <label for="nameLabel">نام و نام خانوادگی</label>
-          <input type="text" id="userName" name="userName" value="<?php if (isset($user)) {echo $user['Name'];}?>" autocomplete="off" placeholder="مثال: مهدی عابدی" autofocus> 
+          <input type="text" id="userName" name="userName" autocomplete="off" placeholder="مثال: مهدی عابدی" autofocus> 
         </div>
 
         <div class="age">
           <label for="ageLabel">سن</label>
-          <input type="number" id="userAge" name="userAge" value="<?php if (isset($user)) {echo $user['Age'];}?>" placeholder="مثال: 20">
+          <input type="number" id="userAge" name="userAge" placeholder="مثال: 20">
         </div>
         
         <div class="city">
           <label for="cityLabel">شهر</label>
-          <input type="text" id="userCity" name="userCity" value="<?php if (isset($user)) {echo $user['City'];}?>" autocomplete="off" placeholder="مثال: اصفهان">
+          <input type="text" id="userCity" name="userCity" autocomplete="off" placeholder="مثال: اصفهان">
         </div>
     
         <div class="btn">
@@ -162,7 +128,7 @@
             echo "
               <tr>
                 <td><a href=index.php?delete=$user[ID]><button type=button class=del>حذف</button></a></td>
-                <td><a href=index.php?edit=$user[ID]><button type=button class=edit>ویرایش</button></a></td>
+                <td><a href=edit.php?edit=$user[ID]><button type=button class=edit>ویرایش</button></a></td>
                 <td>$user[City]</td>
                 <td>$user[Age]</td>
                 <td>$user[Name]</td>
