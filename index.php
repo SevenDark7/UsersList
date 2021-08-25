@@ -27,7 +27,7 @@
     }
     mysqli_select_db($connection, 'usersinfo');
     $SQL = "CREATE TABLE IF NOT EXISTS users (ID INT AUTO_INCREMENT PRIMARY KEY,
-     City VARCHAR(255) NOT NULL, Age INT NOT NULL, Name VARCHAR(255) NOT NULL)";
+     City VARCHAR(255) NOT NULL, Age INT NOT NULL, Name VARCHAR(255) NOT NULL, Level INT NOT NULL)";
     if (!$table = mysqli_query($connection, $SQL)) {
       echo "Could not create table " . mysqli_error($connection);
     }
@@ -35,13 +35,14 @@
 
 /////////////////////// Insert New User To Table ///////////////////////
 
-    if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity'])) {
+    if (isset($_POST['userName']) && isset($_POST['userAge']) && isset($_POST['userCity']) && isset($_POST['acsLevel'])) {
       $name = $_POST['userName'];
       $age = (int)$_POST['userAge'];
       $city = $_POST['userCity'];
+      $access = (int)$_POST['acsLevel'];
       mysqli_select_db($connection, 'usersinfo');
-      $stmt = mysqli_prepare($connection ,"INSERT INTO users (City, Age, Name) VALUES (?, ?, ?)");
-      mysqli_stmt_bind_param($stmt, 'sis', $city, $age, $name);
+      $stmt = mysqli_prepare($connection ,"INSERT INTO users (City, Age, Name, Level) VALUES (?, ?, ?, ?)");
+      mysqli_stmt_bind_param($stmt, 'sisi', $city, $age, $name, $access);
       mysqli_stmt_execute($stmt);
     }
 
@@ -103,6 +104,14 @@
           <label for="cityLabel">شهر</label>
           <input type="text" id="userCity" name="userCity" autocomplete="off" placeholder="مثال: اصفهان">
         </div>
+
+        <div class="access">
+          <label for="cityLabel">سطح دسترسی</label>
+          <select name="acsLevel">
+            <option value="1">مدیر</option>
+            <option value="0" selected>کاربر عادی</option>
+          </select>
+        </div>
     
         <div class="btn">
           <button type="reset" id="reset">انصراف</button>
@@ -119,6 +128,7 @@
           <th>شهر</th>
           <th>سن</th>
           <th>نام و نام خانوادگی</th>
+          <th>سطح دسترسی</th>
         </tr>
       </thead>
       <tbody class="users">
@@ -132,6 +142,7 @@
                 <td>$user[City]</td>
                 <td>$user[Age]</td>
                 <td>$user[Name]</td>
+                <td>" . (($user["Level"] == 1) ? "Admin" : "Normal") . "</td>
               </tr>
             ";
           }
