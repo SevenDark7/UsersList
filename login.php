@@ -10,24 +10,34 @@
 
     <?php
     if (isset($_POST['name']) && isset($_POST['age']) && isset($_POST['city'])) {
-      $csvFile = fopen('csv/users.csv', 'r');
-      while (!feof($csvFile)) {
-        $user = fgetcsv($csvFile);
-        if (empty($user)) {
-          fclose($csvFile);
-    ?>
-          <script>alert('کاربری با این مشخصات یافت نشد')</script>
-    <?php
-          break;
+      $name = $_POST['name'];
+      $age = (int)$_POST['age'];
+      $city = $_POST['city'];
+      $connection = mysqli_connect('localhost:3306', 'root', '');
+      if (!$connection) {
+        echo "Could not connect to the database" . mysqli_connect_error();
+      }
+      mysqli_select_db($connection, 'usersinfo');
+      $flag = false;
+      $users = mysqli_query($connection, 'SELECT * FROM users');
+      if ($users) {
+        while ($user = mysqli_fetch_assoc($users)) {
+          if ($user['Name'] == $name && $user['Age'] == $age && $user['City'] == $city) {
+            $flag = true;
+          }
         }
-        if ($user[1] == $_POST['name'] && $user[2] == $_POST['age'] && $user[3] == $_POST['city']) {
-          
-    ?>
-          <script>alert('خوش آمدید <?php echo $user[1] ?>')</script>
-    <?php
-          fclose($csvFile);
-          break;
-        }
+      }
+      if ($flag == true) {
+        ?>
+        <script>alert("خوش آمدید");</script>
+        <?php
+        header('location: index.php');
+        return;
+      }
+      else {
+        ?>
+        <script>alert("کاربری با این مشخصات یافت نشد");</script>
+        <?php
       }
     }
     ?>
