@@ -52,25 +52,20 @@ article.formContine {
   margin-left: 3vw;
 }
 
-.name {
+.name, .age, .city, .access {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin: 3% 0;
 }
 
-.age {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin: 3% 0;
+.inputForm input {
+  padding: 0 1rem;
 }
 
-.city {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin: 3% 0;
+.inputForm select {
+  padding: 0 4rem;
+  direction: rtl;
 }
 
 .btn {
@@ -100,7 +95,7 @@ button {
 table.user {
   margin: auto;
   border-spacing: 0 3px;
-  width: 70%;
+  width: 80%;
 }
 
 th, td {
