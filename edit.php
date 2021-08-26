@@ -33,6 +33,10 @@
         return;
         }
         $user = mysqli_fetch_assoc($result);
+        if ($user['Level'] == 1) {
+            header('Location: index.php');
+            return;
+        }
     }
 
 /////////////////////////////////////////////////////////////////////
